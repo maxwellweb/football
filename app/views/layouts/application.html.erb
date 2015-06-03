@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Loginfb</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <a href="#" class="navbar-brand logo">Footbook</a>
+        <ul class="nav navbar-nav">
+          <li class="active"><%= link_to "Status", statuses_path %></li>
+        </ul>
+        <ul class="nav navbar-nav pull-right">
+          <% if user_signed_in? %>
+            <li><%= link_to current_user.primer_nombre, edit_user_registration_path %></li>
+            <li><%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete %></li>
+          <% else %>
+            <li><%= link_to "iniciar sesión", new_user_session_path %></li>
+            <li><%= link_to "Registrarse", new_user_registration_path %></li>
+            <li><%= link_to "Inciar con facebook", user_omniauth_authorize_path(:facebook)%></li>
+          <% end %>
+        </ul>
+      </div>
+  </nav>
+<div class="container">
+ <p class="notice"><%= notice %></p>
+ <p class="alert"><%= alert %></p>
+
+<%= yield %>
+
+</div>
+</body>
+</html>
